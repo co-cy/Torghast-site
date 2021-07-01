@@ -14,3 +14,8 @@ div.body {
     background-color:lightslategray;
     margin: 1% 15%;
 }
+ul.navtext {
+    font-size: 24px;
+    font-weight: 900;
+    color: #d8d5d5;
+}
