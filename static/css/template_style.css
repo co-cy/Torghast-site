@@ -1,9 +1,16 @@
 body {
     margin: 0;
     padding: 0;
-    background-image: url(../images/main-gb.jpg);
     background-position: center center;
-    background-repeat: repeat;
-    background-size: cover;
+    background-repeat: no-repeat;
+    background-size:cover;
     background-attachment: fixed;
+}
+a {
+    text-decoration: none!important;
+}
+div.body {
+    height: 3000px;
+    background-color:lightslategray;
+    margin: 1% 15%;
 }
