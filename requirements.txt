@@ -4,3 +4,6 @@ WTForms==2.3.3
 Flask-WTF==0.15.1
 flask-login==0.5.0
 SQLAlchemy-serializer==1.4.1
+pymysql==1.0.2
+cryptography==3.4.7
+mysqlclient==2.0.3
