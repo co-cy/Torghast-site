@@ -21,13 +21,13 @@ app.register_blueprint(main_page.blueprint)
 app.register_blueprint(register_page.blueprint)
 # Создал страничку подключил блупринт
 
-db = SQLAlchemy(app)
-
-
-from pyScript.users import *
-
-
-db.create_all()
+# db = SQLAlchemy(app)
+#
+#
+# from pyScript.users import *
+#
+#
+# db.create_all()
 
 
 if __name__ == '__main__':

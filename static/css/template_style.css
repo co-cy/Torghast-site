@@ -19,3 +19,10 @@ ul.navtext {
     font-weight: 900;
     color: #d8d5d5;
 }
+div.line {
+    height: 1em;
+    width: 100%;
+    border: 1px solid lightslategray;
+    border-radius: 10px;
+    background: linear-gradient(to right, white 20%, transparent 20%);
+}

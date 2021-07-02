@@ -1,11 +1,12 @@
 from flask import Blueprint, render_template, request
-
+# from pyScript import monitor
 blueprint = Blueprint('main_page', __name__)
 
 
 @blueprint.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'GET':
+        # data = monitor.request('localhost', 25565)
         return render_template('main_page.html')
     if request.method == 'POST':
         login = request.form['login']
