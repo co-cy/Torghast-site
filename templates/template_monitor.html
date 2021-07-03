@@ -1,11 +1,11 @@
-<div class="bg-light container text-dark p-3" style="max-width: 100%; box-sizing: border-box;">
-    <div class="row" style="margin-bottom: 0.5em;">
-        <strong>{{ server_name }}</strong>
+<div class="bg-light container text-dark" style="max-width: 100%; box-sizing: border-box;">
+    <div class="row m-2" style="margin-top:2em!important">
+        {{ server_name }}
     </div>
-    <div class="row">
+    <div class="row m-2">
         <div class="line" id="line1"></div>
     </div>
-    <div class="row" style="margin-bottom: 0.5em;">
-        <strong id="online1">{{ server_online }}</strong>
+    <div class="row m-2" style="text-align: end;" id="online1">
+        <div class="d-flex justify-content-end" style="padding-right: 0px;">{{ server_online }}</div>
     </div>
 </div>

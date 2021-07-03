@@ -3,8 +3,9 @@ body {
     padding: 0;
     background-position: center center;
     background-repeat: no-repeat;
-    background-size:cover;
+    background-size: cover;
     background-attachment: fixed;
+    background-image: url('https://victorycraft.ru/templates/victorycraft/assets/images/background.jpg?ver=2');
 }
 a {
     text-decoration: none!important;
@@ -12,6 +13,8 @@ a {
 div.body {
     height: 3000px;
     margin-top: 84px;
+    font-size: 16px;
+    font-weight: 500;
 }
 ul.navtext {
     font-size: 24px;
@@ -28,4 +31,14 @@ div.line {
 strong
 {
     padding: 0px!important;
+    font-size: 24px;
+}
+div.header {
+    background-color: rgb(33, 37, 41, 0.5);
+}
+div.header:hover {
+    background-color: rgb(33, 37, 41);
+}
+li.nav-item:hover {
+    opacity: 0.5;
 }

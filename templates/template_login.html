@@ -3,7 +3,7 @@
     <form method="post" action="/">
       {{ login_form.csrf_token }}
       <div class="form-group">
-        <label for="{{ login_form.login.id }}" class="text-reset"> <strong>{{ login_form.login.label.text }}</strong></label>
+        <label for="{{ login_form.login.id }}" class="text-reset"> {{ login_form.login.label.text }}</label>
         {{ login_form.login(class="form-control", placeholder="Введите никнейм/почту") }}
         {% for error in login_form.login.errors %}
                 <div class="alert alert-danger" role="alert" name="first-field">
@@ -12,7 +12,7 @@
         {% endfor %}
       </div>
       <div class="form-group my-2">
-        <label for="{{ login_form.password.id }}" class="text-reset"> <strong>{{ login_form.password.label.text }}</strong></label>
+        <label for="{{ login_form.password.id }}" class="text-reset">{{ login_form.password.label.text }}</label>
         {{ login_form.password(class="form-control", placeholder="Введите пароль") }}
         {% for error in login_form.password.errors %}
                 <div class="alert alert-danger" role="alert" name="first-field">
