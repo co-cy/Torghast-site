@@ -11,14 +11,38 @@
         <div class="form-group">
             <label for="{{ reg_form.email.id }}" class="text-reset">{{ reg_form.email.label }}</label>
             {{ reg_form.email(class="form-control", placeholder="Введите email") }}
+            {% for error in reg_form.email.errors %}
+                <div class="alert alert-danger" role="alert" name="first-field">
+                    {{ error }}
+                </div>
+            {% endfor %}
         </div>
         <div class="form-group">
             <label for="exampleInputEmail1" class="text-reset">Придумайте никнейм</label>
-            <input type="login" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Введите логин" name="login">
+            <input type="login" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Введите логин" name="nickname">
+            {% for error in reg_form.nickname.errors %}
+                <div class="alert alert-danger" role="alert" name="first-field">
+                    {{ error }}
+                </div>
+            {% endfor %}
         </div>
         <div class="form-group">
             <label for="exampleInputPassword1" class="text-reset">Придумайте пароль</label>
             <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Введите пароль" name="password">
+            {% for error in reg_form.password.errors %}
+                <div class="alert alert-danger" role="alert" name="first-field">
+                    {{ error }}
+                </div>
+            {% endfor %}
+        </div>
+        <div class="form-group">
+            <label for="{{ reg_form.repeat_password.id }}" class="text-reset">{{ reg_form.repeat_password.label }}</label>
+            {{ reg_form.repeat_password(class="form-control", placeholder="Повторный пароль") }}
+            {% for error in reg_form.repeat_password.errors %}
+                <div class="alert alert-danger" role="alert" name="first-field">
+                    {{ error }}
+                </div>
+            {% endfor %}
         </div>
         <div class="my-1">
             <button type="submit" class="btn btn-primary" name="registration">Зарегистрироваться</button>

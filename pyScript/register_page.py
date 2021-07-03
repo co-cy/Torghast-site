@@ -10,11 +10,12 @@ blueprint = Blueprint('register', __name__)
 
 @blueprint.route('/register', methods=['POST', 'GET'])
 def register():
+    login_form = LoginForm()
     reg_form = RegistrationForm()
 
     if reg_form.validate_on_submit():
-        user_nickname = User.query.filter_by(nickname=reg_form.login.data).first()
-        user_email = User.query.filter_by(email=reg_form.login.data).first()
+        user_nickname = User.query.filter_by(nickname=reg_form.nickname.data).first()
+        user_email = User.query.filter_by(email=reg_form.email.data).first()
 
         if not user_nickname:
             valid_nick = True
@@ -28,7 +29,7 @@ def register():
             valid_email = False
             reg_form.email.errors.append('email занят')
 
-        if reg_form.password == reg_form.repeat_password:
+        if reg_form.password.data == reg_form.repeat_password.data:
             valid_password = True
         else:
             valid_password = False
@@ -37,10 +38,12 @@ def register():
         if valid_nick and valid_email and valid_password:
             # Добавление в базу данных пользователя
             with current_app.app_context():
-                user = User(reg_form.email, reg_form.nickname, reg_form.password)
+                user = User(reg_form.email.data, reg_form.nickname.data, reg_form.password.data)
+                print(user.password)
+                print(len(user.password))
                 db.session.add(user)
                 db.session.commit()
             # Авторизация пользователя
             login_user(user, remember=reg_form.remember_me)
 
-    return render_template('register.html', reg_form=reg_form)
+    return render_template('register.html', reg_form=reg_form, login_form=login_form)
