@@ -2,7 +2,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from sqlalchemy_serializer import SerializerMixin
 from flask_login import UserMixin
 from datetime import datetime
-from main import db
+from database.db import db
 
 
 class User(db.Model, UserMixin, SerializerMixin):
@@ -27,7 +27,7 @@ class User(db.Model, UserMixin, SerializerMixin):
 
     email = db.Column(db.String(32), unique=True, index=True, nullable=False)
     nickname = db.Column(db.String(16), unique=True, index=True, nullable=False)
-    password = db.Column(db.String(64), nullable=False)
+    password = db.Column(db.String(128), nullable=False)
 
     balance = db.Column(db.Integer, default=0, nullable=False)
     skin = db.Column(db.Integer, default=0, nullable=False)

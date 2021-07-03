@@ -1,34 +1,49 @@
+from pyScript.login_manager import login_manager
+from pyScript import main_page, register_page
 from configparser import ConfigParser
-from flask_sqlalchemy import SQLAlchemy
+from pyScript.csrf import csrf
+from database.db import db
+from database import users
 from flask import Flask
 
 app = Flask(__name__)
 
-# config file load
+
 config = ConfigParser()
 config.read('config.ini', encoding='UTF8')
 
-app.config['SECRET_KEY'] = config['main']['SECRET_KEY']
-app.config['SQLALCHEMY_DATABASE_URI'] = config['main']['SQLALCHEMY_DATABASE_URI']
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = config['main'].getboolean('SQLALCHEMY_TRACK_MODIFICATIONS')
-app.config['DEBUG'] = config['main'].getboolean('debug')
 
-from pyScript import main_page, register_page
+def load_config():
+    # config file load
 
-# и т.п импорты страниц
-
-app.register_blueprint(main_page.blueprint)
-app.register_blueprint(register_page.blueprint)
-# Создал страничку подключил блупринт
-
-db = SQLAlchemy(app)
+    app.config['SECRET_KEY'] = config['main']['SECRET_KEY']
+    app.config['SQLALCHEMY_DATABASE_URI'] = config['main']['SQLALCHEMY_DATABASE_URI']
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = config['main'].getboolean('SQLALCHEMY_TRACK_MODIFICATIONS')
+    app.config['DEBUG'] = config['main'].getboolean('debug')
 
 
-from pyScript.users import *
+def load_blueprints():
+    app.register_blueprint(main_page.blueprint)
+    app.register_blueprint(register_page.blueprint)
+    # Создал страничку подключил блупринт
 
 
-db.create_all()
+def load_database():
+    # Иницилизировал базуданных
+    csrf.init_app(app)
+    login_manager.init_app(app)
+    db.init_app(app)
+    with app.app_context():
+        db.create_all()
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    return users.User.query.get(user_id)
 
 
 if __name__ == '__main__':
+    load_config()
+    load_database()
+    load_blueprints()
     app.run(config['main']['ip'], int(config['main']['port']))
