@@ -81,6 +81,17 @@
         </form>
       </div>
       <br>
+      <div class="bg-dark container text-light p-3" style="max-width: 20%; border-radius: 5px;">
+        <div class="row" style="margin-bottom: 0.5em;">
+            {{ server_name}}
+        </div>
+        <div class="row">
+            <div class="line"></div>
+        </div>
+        <div class="row" style="margin-bottom: 0.5em;">
+            {{ server_online }}
+        </div>
+      </div>
       <br>
       {%block content%}{%endblock%}
     </div>
