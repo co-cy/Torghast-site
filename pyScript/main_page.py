@@ -26,7 +26,7 @@ def index():
         user = user_login or user_email
         if user:
             if user.check_password(login_form.password.data):
-                login_user(user_login, remember=login_form.remember_me.data)
+                login_user(user_login, remember=True)
                 if next_page is not None:
                     return redirect(next_page)
                 else:

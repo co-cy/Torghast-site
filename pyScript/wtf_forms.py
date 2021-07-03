@@ -10,7 +10,6 @@ class LoginForm(FlaskForm):
     password = PasswordField('Пароль', validators=[DataRequired("Введите пароль"), Length(8, 64)])
     # TODO add recaptcha
     # recaptcha = None
-    remember_me = BooleanField('Запомнить меня', default=False)
     submit = SubmitField('Войти')
 
 
@@ -19,7 +18,6 @@ class RegistrationForm(FlaskForm):
     email = EmailField('email', validators=[DataRequired("Введите email"), Length(4, 32)])
     password = PasswordField('Пароль', validators=[DataRequired("Введите пароль"), Length(8, 64), ComplexPassword()])
     repeat_password = PasswordField('Повторный пароль', validators=[DataRequired("Введите повторный пароль"), Length(8, 64), ComplexPassword()])
-    remember_me = BooleanField('Запомнить меня', default=False)
     # TODO add recaptcha
     # recaptcha = None
     submit = SubmitField('Зарегистрироваться')

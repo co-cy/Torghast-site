@@ -44,6 +44,6 @@ def register():
                 db.session.add(user)
                 db.session.commit()
             # Авторизация пользователя
-            login_user(user, remember=reg_form.remember_me)
+            login_user(user, remember=True)
 
     return render_template('register.html', reg_form=reg_form, login_form=login_form)
