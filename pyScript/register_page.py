@@ -1,7 +1,6 @@
 from flask import Blueprint, render_template, request, current_app
 from pyScript.wtf_forms import LoginForm, RegistrationForm
 from flask_login import login_user
-from pyScript.login import SingIn
 from database.users import User
 from database.db import db
 
@@ -11,29 +10,37 @@ blueprint = Blueprint('register', __name__)
 
 @blueprint.route('/register', methods=['POST', 'GET'])
 def register():
-    login_form = LoginForm
     reg_form = RegistrationForm()
-    if request.method == 'POST':
-        args = request.args.to_dict()
 
-        if args.get('registration', None) is None:
-            form = LoginForm()
-            if SingIn(form):
-                return 'вошёл и залогинился в базе'
-            return render_template('register.html', login_form=login_form, reg_form=reg_form)
+    if reg_form.validate_on_submit():
+        user_nickname = User.query.filter_by(nickname=reg_form.login.data).first()
+        user_email = User.query.filter_by(email=reg_form.login.data).first()
+
+        if not user_nickname:
+            valid_nick = True
         else:
-            form = RegistrationForm()
+            valid_nick = False
+            reg_form.nickname.errors.append('Ник занят')
 
-            if form.validate_on_submit():
-                # TODO form validation and validators
-                with current_app.app_context():
-                    user = User(form.email, form.nickname, form.password)
-                    db.session.add(user)
-                    db.session.commit()
-                    # TODO add a remember button
-                    login_user(user, remember=True)
-                return 'зареган'
-            return render_template('register.html', login_form=login_form, reg_form=reg_form)
+        if not user_email:
+            valid_email = True
+        else:
+            valid_email = False
+            reg_form.email.errors.append('email занят')
 
-    else:
-        return render_template('register.html', login_form=login_form, reg_form=reg_form)
+        if reg_form.password == reg_form.repeat_password:
+            valid_password = True
+        else:
+            valid_password = False
+            reg_form.repeat_password.errors.append('Пароли не совпадают')
+
+        if valid_nick and valid_email and valid_password:
+            # Добавление в базу данных пользователя
+            with current_app.app_context():
+                user = User(reg_form.email, reg_form.nickname, reg_form.password)
+                db.session.add(user)
+                db.session.commit()
+            # Авторизация пользователя
+            login_user(user, remember=reg_form.remember_me)
+
+    return render_template('register.html', reg_form=reg_form)
