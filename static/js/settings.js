@@ -4,15 +4,13 @@ function change_margin(){
 }
 
 window.onresize = change_margin;
-window.onload   = change_margin;
-
 function online_list(id_online, id_line){
     var server_online = document.getElementById(id_online).innerText;
     var curent_online = server_online.split('/')[0];
     var maximal_online = server_online.split('/')[1];
     var online_procent = Number(curent_online) / Number(maximal_online) * 100;
     var block = document.getElementById(id_line);
-    block.style.background = `linear-gradient(to right, white ${online_procent}%, transparent ${online_procent}%)`;
+    block.style.background = `linear-gradient(to right, #33ffff ${online_procent}%, transparent ${online_procent}%)`;
 }
 
 window.onload = online_list('online1', 'line1')

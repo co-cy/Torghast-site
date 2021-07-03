@@ -11,8 +11,7 @@ a {
 }
 div.body {
     height: 3000px;
-    background-color:lightslategray;
-    margin: 1% 15%;
+    margin-top: 84px;
 }
 ul.navtext {
     font-size: 24px;
@@ -24,5 +23,9 @@ div.line {
     width: 100%;
     border: 1px solid lightslategray;
     border-radius: 10px;
-    background: linear-gradient(to right, white 0%, transparent 0%);
+    background: linear-gradient(to right, #33ffff 0%, transparent 0%);
+}
+strong
+{
+    padding: 0px!important;
 }

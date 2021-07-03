@@ -15,7 +15,7 @@ class LoginForm(FlaskForm):
 
 class RegistrationForm(FlaskForm):
     nickname = StringField('Ник', validators=[DataRequired("Введите ник"), Length(3, 16)])
-    email = EmailField('email', validators=[DataRequired("Введите email"), Length(4, 32)])
+    email = EmailField('Email', validators=[DataRequired("Введите email"), Length(4, 32)])
     password = PasswordField('Пароль', validators=[DataRequired("Введите пароль"), Length(8, 64), ComplexPassword()])
     repeat_password = PasswordField('Повторный пароль', validators=[DataRequired("Введите повторный пароль"), Length(8, 64), ComplexPassword()])
     # TODO add recaptcha

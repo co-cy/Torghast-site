@@ -1,39 +1,28 @@
-<div name="body" class="body p-3" id='id2'>
-    <div class="auth bg-dark w-25 p-2 text-light">
-      <form method="post" action="/">
-        {{ login_form.csrf_token }}
-        <div class="d-flex justify-content-center">
-          <strong>Авторизация</strong>
-        </div>
-        <div class="form-group">
-          <label for="InputLogin" class="text-reset">Логин</label>
-          <input type="login" class="form-control" id="InputLogin" aria-describedby="emailHelp" placeholder="Введите логин" name="login">
-        </div>
-        <div class="form-group">
-          <label for="InputPassword" class="text-reset">Пароль</label>
-          <input type="password" class="form-control" id="InputPassword" placeholder="Введите пароль" name="password">
-        </div>
-        <div class="row my-1">
-          <div class="col">
-            <button type="submit" class="btn btn-primary">Вход</button>
-          </div>
-          <div class="col">
-            <div class="justify-content-end d-flex align-content-center">
-              <a href="/register" class="text-info">Регистрация</a>
-            </div>
-          </div>
-        </div>
-      </form>
-    </div>
-    <br>
-    <div class="bg-dark container text-light p-3" style="max-width: 20%; border-radius: 5px;">
-      <div class="row" style="margin-bottom: 0.5em;">
-          {{ server_name }}
+<div name="body" class="body container mw-100" id='id2'>
+  <div class="row" style="height: 100px;">
+    <div class="col-2">
+      <div class="row bg-dark m-3" style="color: #d8d5d5;margin-bottom: 0px!important;">
+        <strong> Наши сервера </strong>
       </div>
-      <div class="row">
-          <div class="line" id="line1"></div>
-      </div>
-      <div class="row" style="margin-bottom: 0.5em;" id="online1">
-          {{ server_online }}
+      <div class="row m-3 shadow" style="margin-top: 0px!important;">
+        {%include 'template_monitor.html'%}
       </div>
     </div>
+    <div class="col p-3">
+      <div class="row bg-dark m-3" style="color: #d8d5d5;margin-bottom: 0px!important;">
+        <strong> Главная </strong>
+      </div>
+      <div class="row m-3 shadow" style="height: 500px;margin-top: 0px!important;">
+        {%block content%} {%endblock%}
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="row bg-dark m-3" style="color: #d8d5d5;margin-bottom: 0px!important;">
+        <strong> Авторицзация </strong>
+      </div>
+      <div class="row m-3 shadow" style="margin-top: 0px!important;">
+        {% include 'template_login.html' %}
+      </div>
+    </div>
+  </div>
+</div>

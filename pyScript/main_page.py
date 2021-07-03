@@ -31,7 +31,7 @@ def index():
                     return redirect(next_page)
                 else:
                     data = monitor.request('localhost', 25565)
-                    return render_template('main_page.html', login_form=login_form, **config, server_name=data[0] + ' ' + data[1], server_online=data[2] + '/' + data[3])
+                    return render_template('main_page.html', login_form=login_form, **config, server_name=data[0], server_online=data[1])
             else:
                 login_form.password.errors.append('Неверный пароль')
 
@@ -42,4 +42,4 @@ def index():
         return redirect(next_page)
     else:
         data = monitor.request('localhost', 25565)
-        return render_template('main_page.html', login_form=login_form, **config, server_name=data[0] + ' ' + data[1], server_online=data[2] + '/' + data[3])
+        return render_template('main_page.html', login_form=login_form, **config, server_name=data[0], server_online=data[1])

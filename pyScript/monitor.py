@@ -10,6 +10,7 @@ def request(adress, port):
         client_socket.close()
         data = str(data).replace('x00', '').replace('xa7', ' ').replace('\\', '')[2:-1].split()
         del data[0]
+        data = [data[0] + ' ' + data[1], data[2] + '/' + data[3]]
         return data
     except ConnectionRefusedError:
-        return ['Offline', '', '0', '20']
+        return ['Offline', '0/20']

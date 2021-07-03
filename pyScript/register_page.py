@@ -3,12 +3,14 @@ from pyScript.wtf_forms import LoginForm, RegistrationForm
 from flask_login import login_user
 from database.users import User
 from database.db import db
+from pyScript import monitor
 
 
 blueprint = Blueprint('register', __name__)
 
 
 @blueprint.route('/register', methods=['POST', 'GET'])
+@blueprint.route('/reg', methods=['POST', 'GET'])
 def register():
     login_form = LoginForm()
     reg_form = RegistrationForm()
@@ -27,7 +29,7 @@ def register():
             valid_email = True
         else:
             valid_email = False
-            reg_form.email.errors.append('email занят')
+            reg_form.email.errors.append('Email занят')
 
         if reg_form.password.data == reg_form.repeat_password.data:
             valid_password = True
@@ -45,5 +47,10 @@ def register():
                 db.session.commit()
             # Авторизация пользователя
             login_user(user, remember=True)
-
-    return render_template('register.html', reg_form=reg_form, login_form=login_form)
+    data = monitor.request('localhost', 25565)
+    config = {
+        'title_name': 'Register',
+        'server_name': data[0],
+        'server_online': data[1]
+    }
+    return render_template('register.html', reg_form=reg_form, login_form=login_form, **config)
