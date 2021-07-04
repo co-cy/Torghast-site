@@ -2,6 +2,7 @@ import socket
 
 
 def request(adress, port):
+    # TODO optimize time load
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     try:
         client_socket.connect((adress, port))

@@ -1,9 +1,9 @@
-from flask import Blueprint, render_template, request, current_app
+from flask import Blueprint, render_template, redirect, current_app
 from pyScript.wtf_forms import LoginForm, RegistrationForm
 from flask_login import login_user
 from database.users import User
-from database.db import db
 from pyScript import monitor
+from database.db import db
 
 
 blueprint = Blueprint('register', __name__)
@@ -41,12 +41,14 @@ def register():
             # Добавление в базу данных пользователя
             with current_app.app_context():
                 user = User(reg_form.email.data, reg_form.nickname.data, reg_form.password.data)
-                print(user.password)
-                print(len(user.password))
                 db.session.add(user)
                 db.session.commit()
             # Авторизация пользователя
-            login_user(user, remember=True)
+
+            # TODO fix login_user (error in login) when use login_user(user) + register_page
+            login_user(User.query.filter_by(nickname=reg_form.nickname.data).first(), remember=True)
+            return redirect('/')
+
     data = monitor.request('localhost', 25565)
     config = {
         'title_name': 'Register',

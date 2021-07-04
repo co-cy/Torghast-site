@@ -1,5 +1,5 @@
 from pyScript.login_manager import login_manager
-from pyScript import main_page, register_page
+from pyScript import main_page, register_page, logout
 from configparser import ConfigParser
 from pyScript.csrf import csrf
 from database.db import db
@@ -15,16 +15,16 @@ config.read('config.ini', encoding='UTF8')
 
 def load_config():
     # config file load
-
     app.config['SECRET_KEY'] = config['main']['SECRET_KEY']
     app.config['SQLALCHEMY_DATABASE_URI'] = config['main']['SQLALCHEMY_DATABASE_URI']
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = config['main'].getboolean('SQLALCHEMY_TRACK_MODIFICATIONS')
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = config['main'].getboolean('SQLa@A123.A4ALCHEMY_TRACK_MODIFICATIONS')
     app.config['DEBUG'] = config['main'].getboolean('debug')
 
 
 def load_blueprints():
     app.register_blueprint(main_page.blueprint)
     app.register_blueprint(register_page.blueprint)
+    app.register_blueprint(logout.blueprint)
     # Создал страничку подключил блупринт
 
 
