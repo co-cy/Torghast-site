@@ -5,6 +5,8 @@ from pyScript.csrf import csrf
 from database.db import db
 from database import users
 from flask import Flask
+from threading import Thread
+from pyScript import monitor
 
 app = Flask(__name__)
 
@@ -46,4 +48,6 @@ if __name__ == '__main__':
     load_config()
     load_database()
     load_blueprints()
+    t1 = Thread(target=monitor.while_function, args=('localhost', 25565))
+    t1.start()
     app.run(config['main']['ip'], int(config['main']['port']))

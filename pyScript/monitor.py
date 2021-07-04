@@ -1,4 +1,5 @@
 import socket
+from time import sleep
 
 
 def request(adress, port):
@@ -15,3 +16,12 @@ def request(adress, port):
         return data
     except ConnectionRefusedError:
         return ['Offline', '0/20']
+
+
+def while_function(adress, port):
+    while 1:
+        # TODO заменить запись в файл на работу с памятью.
+        k = request(adress, port)
+        with open('monitor_info.txt', 'w') as f:
+            f.write('&'.join(k))
+        sleep(10)

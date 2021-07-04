@@ -2,7 +2,6 @@ from flask import Blueprint, render_template, redirect, request
 from flask_login import current_user, login_user
 from pyScript.wtf_forms import LoginForm
 from database.users import User
-from pyScript import monitor
 
 blueprint = Blueprint('main_page', __name__)
 
@@ -30,7 +29,8 @@ def index():
                 if next_page is not None:
                     return redirect(next_page)
                 else:
-                    data = monitor.request('localhost', 25565)
+                    with open('monitor_info.txt', 'r') as f:
+                        data = list(f.readline().split('&'))
                     return render_template('main_page.html', login_form=login_form, **config, server_name=data[0], server_online=data[1])
             else:
                 login_form.password.errors.append('Неверный пароль')
@@ -41,5 +41,6 @@ def index():
     if next_page is not None:
         return redirect(next_page)
     else:
-        data = monitor.request('localhost', 25565)
+        with open('monitor_info.txt', 'r') as f:
+            data = list(f.readline().split('&'))
         return render_template('main_page.html', login_form=login_form, **config, server_name=data[0], server_online=data[1])
