@@ -1,5 +1,5 @@
+from pyScript import main_page, register_page, logout, api
 from pyScript.login_manager import login_manager
-from pyScript import main_page, register_page, logout
 from configparser import ConfigParser
 from pyScript.csrf import csrf
 from database.db import db
@@ -27,6 +27,7 @@ def load_blueprints():
     app.register_blueprint(main_page.blueprint)
     app.register_blueprint(register_page.blueprint)
     app.register_blueprint(logout.blueprint)
+    app.register_blueprint(api.blueprint)
     # Создал страничку подключил блупринт
 
 

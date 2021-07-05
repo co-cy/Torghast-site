@@ -32,6 +32,12 @@ class User(db.Model, UserMixin, SerializerMixin):
     balance = db.Column(db.Integer, default=0, nullable=False)
     skin = db.Column(db.Integer, default=0, nullable=False)
 
+    permissions = db.Column(db.Integer, default=0, nullable=False)
+
+    uuid = db.Column(db.String(48), unique=True, index=True, nullable=True)
+    accessToken = db.Column(db.String(32), index=True, nullable=True)
+    serverID = db.Column(db.String(48), nullable=True)
+
     # TODO figure out the time zones
     privilege = db.Column(db.Integer, default=0, nullable=False)
     date_start_privilege = db.Column(db.DateTime, default=datetime.now(), nullable=False)
@@ -52,7 +58,7 @@ class User(db.Model, UserMixin, SerializerMixin):
     # id_ip = db.Column()
 
     def __init__(self, email: str, nickname: str, password: str,
-                 balance: int = None, skin: str = None, privilege: int = None, donat_balance: int = None,
+                 balance: int = None, skin: str = None, permissions: int = None, privilege: int = None, donat_balance: int = None,
                  ability_edit_prefix: bool = None, ability_edit_color_prefix: bool = None,
                  ability_edit_color_text: bool = None, ability_edit_color_nickname: bool = None,
                  ability_edit_nickname: bool = None, ability_set_hd_skin: bool = None):
@@ -67,6 +73,9 @@ class User(db.Model, UserMixin, SerializerMixin):
 
         if skin is not None:
             self.skin = skin
+
+        if permissions is not None:
+            self.permissions = permissions
 
         if privilege is not None:
             self.privilege = privilege
@@ -106,6 +115,18 @@ class User(db.Model, UserMixin, SerializerMixin):
 
     def set_skin(self, new_skin: str):
         self.skin = new_skin
+
+    def set_permissions(self, new_permissions: int):
+        self.permissions = new_permissions
+
+    def set_uuid(self, new_uuid: str):
+        self.uuid = new_uuid
+
+    def set_accessToken(self, new_accessToken: str):
+        self.accessToken = new_accessToken
+
+    def set_serverID(self, new_serverID: str):
+        self.serverID = new_serverID
 
     def set_privilege(self, new_privilege: int):
         self.privilege = new_privilege
@@ -167,6 +188,18 @@ class User(db.Model, UserMixin, SerializerMixin):
 
     def get_skin(self) -> str:
         return self.skin
+
+    def get_permissions(self) -> int:
+        return self.permissions
+
+    def check_permissions(self, other_permissions: int) -> bool:
+        return self.permissions == other_permissions
+
+    def get_uuid(self) -> str:
+        return self.uuid
+
+    def check_uuid(self, other_uuid: str) -> bool:
+        return self.uuid == other_uuid
 
     def get_privilege(self) -> int:
         return self.privilege
