@@ -42,3 +42,16 @@ div.header:hover {
 li.nav-item:hover {
     opacity: 0.5;
 }
+div.row {
+    margin: 0px;
+    padding: 0px;
+}
+div.col {
+    margin: 0px;
+    padding: 0px;
+}
+img.head_frame {
+    height: 6em;
+    width: auto;
+
+}
