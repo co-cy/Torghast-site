@@ -33,5 +33,26 @@
     </form>
 </div>
 {%else%} 
-{{ current_user.nickname }}
+<div class="bg-light container p-3" style="min-height: 10em;">
+  <div class="row">
+    <div class="row">
+      <div class="d-inline col-4 p-1">
+        <div>
+          <img src="https://borealis.su/engine/modules/avatar/face.php?username=BeSe&size=128" alt="Avatar" class="head_frame">
+        </div>
+      </div>
+      <div class="col" style="padding: 0px;">
+        <div class="row">
+          <span>{{ current_user.get_nickname() }}</span>
+        </div>
+        <div class="row">
+          <span>{{ current_user.get_balance() }}</span>
+        </div>
+        <div class="row">
+          <span><a href="">Личный кабинет</a></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 {%endif%}
