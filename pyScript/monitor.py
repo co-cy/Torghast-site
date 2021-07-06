@@ -1,10 +1,10 @@
-import socket
+from socket import socket, AF_INET, SOCK_STREAM
+from main import config
 from time import sleep
 
 
 def request(adress, port):
-    # TODO optimize time load
-    client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    client_socket = socket(AF_INET, SOCK_STREAM)
     try:
         client_socket.connect((adress, port))
         client_socket.send(b"\xFE")
@@ -18,10 +18,12 @@ def request(adress, port):
         return ['Offline', '0/20']
 
 
-def while_function(adress, port):
-    while 1:
-        # TODO заменить запись в файл на работу с памятью.
-        k = request(adress, port)
-        with open('monitor_info.txt', 'w') as f:
-            f.write('&'.join(k))
-        sleep(10)
+def while_function():
+    while True:
+        for name_server in config['servers']:
+            ip, port = config['servers'][name_server].split(':')
+            # TODO заменить запись в файл на работу с памятью.
+            k = request(ip, int(port))
+            with open('monitor_info.txt', 'w') as f:
+                f.write('&'.join(k))
+            sleep(10)

@@ -3,6 +3,7 @@ from sqlalchemy_serializer import SerializerMixin
 from flask_login import UserMixin
 from datetime import datetime
 from database.db import db
+from uuid import uuid4
 
 
 class User(db.Model, UserMixin, SerializerMixin):
@@ -34,8 +35,8 @@ class User(db.Model, UserMixin, SerializerMixin):
 
     permissions = db.Column(db.Integer, default=0, nullable=False)
 
-    uuid = db.Column(db.String(48), unique=True, index=True, nullable=True)
-    accessToken = db.Column(db.String(32), index=True, nullable=True)
+    uuid = db.Column(db.String(48), default=uuid4(), unique=True, index=True, nullable=True)
+    accessToken = db.Column(db.String(32), nullable=True)
     serverID = db.Column(db.String(48), nullable=True)
 
     # TODO figure out the time zones
@@ -200,6 +201,12 @@ class User(db.Model, UserMixin, SerializerMixin):
 
     def check_uuid(self, other_uuid: str) -> bool:
         return self.uuid == other_uuid
+
+    def get_accessToken(self) -> str:
+        return self.accessToken
+
+    def get_serverID(self) -> str:
+        return self.serverID
 
     def get_privilege(self) -> int:
         return self.privilege
