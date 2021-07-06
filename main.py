@@ -1,26 +1,27 @@
 from pyScript import main_page, register_page, logout, api
 from pyScript.login_manager import login_manager
-from configparser import ConfigParser
 from pyScript.csrf import csrf
 from threading import Thread
 from pyScript import monitor
 from database.db import db
 from database import users
 from flask import Flask
+from json import load
 
 app = Flask(__name__)
 
 
-config = ConfigParser()
-config.read('config.ini', encoding='UTF8')
+with open('config.json') as file:
+    config = load(file)
 
 
 def load_config():
     # config file load
-    app.config['SECRET_KEY'] = config['main']['SECRET_KEY']
-    app.config['SQLALCHEMY_DATABASE_URI'] = config['main']['SQLALCHEMY_DATABASE_URI']
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = config['main'].getboolean('SQLALCHEMY_TRACK_MODIFICATIONS')
-    app.config['DEBUG'] = config['main'].getboolean('debug')
+    app.config.update(SECRET_KEY=config['SECRET_KEY'],
+                      SQLALCHEMY_DATABASE_URI=config['SQLALCHEMY_DATABASE_URI'],
+                      SQLALCHEMY_TRACK_MODIFICATIONS=config['SQLALCHEMY_TRACK_MODIFICATIONS'],
+                      DEBUG=config['debug_mode'],
+                      SQLALCHEMY_POOL_SIZE=6)
 
 
 def load_blueprints():
@@ -45,10 +46,15 @@ def load_user(user_id):
     return users.User.query.filter_by(id=user_id).first()
 
 
+@app.context_processor
+def info_all_servers():
+    return dict(info=monitor.info_all_servers())
+
+
 if __name__ == '__main__':
     load_config()
     load_database()
     load_blueprints()
-    t1 = Thread(target=monitor.while_function, args=())
+    t1 = Thread(target=monitor.endless_checking_servers, args=(config, ))
     t1.start()
-    app.run(config['main']['ip'], int(config['main']['port']))
+    app.run(config['ip'], int(config['port']))

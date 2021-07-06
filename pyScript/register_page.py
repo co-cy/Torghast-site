@@ -2,7 +2,6 @@ from flask import Blueprint, render_template, redirect, current_app
 from pyScript.wtf_forms import LoginForm, RegistrationForm
 from flask_login import login_user
 from database.users import User
-from pyScript import monitor
 from database.db import db
 
 
@@ -49,10 +48,4 @@ def register():
             login_user(User.query.filter_by(nickname=reg_form.nickname.data).first(), remember=True)
             return redirect('/')
 
-    data = monitor.request('localhost', 25565)
-    config = {
-        'title_name': 'Register',
-        'server_name': data[0],
-        'server_online': data[1]
-    }
-    return render_template('register.html', reg_form=reg_form, login_form=login_form, **config)
+    return render_template('register.html', reg_form=reg_form, login_form=login_form)

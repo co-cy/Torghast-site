@@ -29,9 +29,7 @@ def index():
                 if next_page is not None:
                     return redirect(next_page)
                 else:
-                    with open('monitor_info.txt', 'r') as f:
-                        data = list(f.readline().split('&'))
-                    return render_template('main_page.html', login_form=login_form, **config, server_name=data[0], server_online=data[1])
+                    return render_template('main_page.html', login_form=login_form, **config)
             else:
                 login_form.password.errors.append('Неверный пароль')
 
@@ -41,6 +39,4 @@ def index():
     if next_page is not None:
         return redirect(next_page)
     else:
-        with open('monitor_info.txt', 'r') as f:
-            data = list(f.readline().split('&'))
-        return render_template('main_page.html', login_form=login_form, **config, server_name=data[0], server_online=data[1])
+        return render_template('main_page.html', login_form=login_form, **config)

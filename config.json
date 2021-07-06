@@ -1,0 +1,32 @@
+{
+  "ip": "127.0.0.1",
+  "port": 8008,
+  "debug_mode": false,
+  "timezone_server": "UTC+3",
+
+  "SECRET_KEY": "G4Wl39Di85RJxdK5Jk1E7MQqPiIw6j63",
+  "SQLALCHEMY_DATABASE_URI": "mysql://root:@localhost:3306/app_db",
+  "SQLALCHEMY_TRACK_MODIFICATIONS": false,
+
+  "minecraft_servers":
+  [
+    {
+      "id": 0,
+      "name": "TopCraft",
+      "ip": "localhost",
+      "port": 25565
+    },
+    {
+      "id": 1,
+      "name": "TopCraft2",
+      "ip": "localhost",
+      "port": 25565
+    },
+    {
+      "id": 2,
+      "name": "TopCraft3",
+      "ip": "localhost",
+      "port": 25565
+    }
+  ]
+}
