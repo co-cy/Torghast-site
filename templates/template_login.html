@@ -34,25 +34,31 @@
 </div>
 {%else%} 
 <div class="bg-light container p-3" style="min-height: 10em;">
-  <div class="row">
-    <div class="row">
-      <div class="d-inline col-4 p-1">
-        <div>
-          <img src="https://borealis.su/engine/modules/avatar/face.php?username=BeSe&size=128" alt="Avatar" class="head_frame">
-        </div>
-      </div>
-      <div class="col" style="padding: 0px;">
-        <div class="row">
-          <span>{{ current_user.get_nickname() }}</span>
-        </div>
-        <div class="row">
-          <span>{{ current_user.get_balance() }}</span>
-        </div>
-        <div class="row">
-          <span><a href="">Личный кабинет</a></span>
-        </div>
+  <div class="row d-inline-flex">
+    <div class="p-1" style="width: auto; margin: 0px;">
+      <div>
+        <img src="https://borealis.su/engine/modules/avatar/face.php?username=BeSe&size=128" alt="Avatar" class="head_frame">
       </div>
     </div>
+    <div class="container" style="padding: 0px; width: auto; margin: 0px;">
+      <div class="row " style="margin-bottom: 1em;">
+        <span>{{ current_user.get_nickname() }}</span>
+      </div>
+      <div class="row" style="margin-bottom: 1em;">
+        <span>Игровой баланс: {{ current_user.get_balance() }}</span>
+      </div>
+      <div class="row">
+        <span><a href="/lk">Личный кабинет</a></span>
+      </div>
+    </div>
+  </div>
+  <div class="row justify-content-end d-flex">
+    <button type="button" onclick="location.href='/logout'" class="btn btn-outline-dark align-items-center justify-content-center" style="width: 36px; height: 32px;padding: 0px; padding-bottom: 4px;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/>
+        <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
+      </svg>
+    </button>
   </div>
 </div>
 {%endif%}

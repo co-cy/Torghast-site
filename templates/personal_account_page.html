@@ -1,0 +1,59 @@
+{%extends 'main_template.html'%}
+{%block content%}
+{%if current_user.is_authenticated%}
+<div class="row shadow bg-light container p-3" style="height: auto;margin-top: 0px!important;">
+    <div class="col-7">
+        <div class="row shadow my-3 p-2">
+            <span class="col">Ваш никнейм: {{current_user.get_nickname()}}</span>
+            <span class="col">Ваша привелегия: {{current_user.get_privilege()}}</span>
+        </div>
+        <div class="row shadow my-3 p-2">
+            <span class="col d-flex align-items-center">Ваш баланс: {{current_user.get_donat_balance()}}</span>
+            <span class="col d-flex justify-content-end">
+                <button type="button" class="btn btn-outline-dark">Пополнить</button>
+            </span>
+        </div>
+        <div class="row shadow my-3 p-3" >
+            <div class="row bg-dark text-white px-3" style="height: 2em;">
+                Платные услуги
+            </div>
+            <div class="row" style="margin-bottom: 5%; height: 100px; box-shadow: 0 1px 9px #575555 inset;"></div>
+
+            <div class="row bg-dark text-white px-3" style="height: 2em;">
+                Редактирование профиля
+            </div>
+            <div class="row" style="margin-bottom: 5%; height: 100px; box-shadow: 0 1px 9px #575555 inset;"></div>
+        </div>
+    </div>
+    <div class="col-5" style="padding-left: 5%;">
+        <div class="row bg-dark text-white">
+            Игровая модель персонажа
+        </div>
+        <div class="row shadow" style="margin-bottom: 1em; height: 300px;">
+            <img src="" alt="3D Skin">
+        </div>
+        <div class="row" style="margin-bottom: 1em;">
+            <span class="col">Сменить скин</span>
+            <span class="col">
+                <form action="">
+                    <input type="file" class="" placeholder="Выберите файл">
+                </form>
+            </span>
+        </div>
+        <div class="row">
+            <span class="col">Сменить плащь</span>
+            <span class="col">
+                <form action="">
+                    <input type="file" class="" placeholder="Выберите файл">
+                </form>
+            </span>
+        </div>
+    </div>
+</div>
+{%else%}
+<div class="row shadow bg-light d-flex justify-content-center align-items-center" style="height: 500px;margin-top: 0px!important;font-size: 40px; font-weight: 800;">
+    Пройдите авторизацию.
+</div>
+{%endif%}
+
+{%endblock%}
