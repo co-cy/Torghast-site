@@ -62,8 +62,12 @@ img.server_img {
     height: 100%;
     width: 100%;
 }
+div.server_select {
+    opacity: 0.5;
+    background-image: url(https://avatars.mds.yandex.net/get-zen_doc/1901404/pub_5e28bf1032335400b12deb9e_5e28bfcb0be00a00ad27be37/scale_1200);
+    background-size: cover;
+}
 div.server_select:hover {
-    background-color: black;
-    color: #d8d5d5;
+    opacity: 1;
     cursor: pointer
 }
