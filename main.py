@@ -2,7 +2,7 @@ from pyScript import main_page, register_page, logout, api
 from pyScript.login_manager import login_manager
 from pyScript.csrf import csrf
 from threading import Thread
-from pyScript import monitor, personal_account
+from pyScript import monitor, personal_account, our_servers, server_info
 from database.db import db
 from database import users
 from flask import Flask
@@ -31,6 +31,8 @@ def load_blueprints():
     app.register_blueprint(logout.blueprint)
     app.register_blueprint(api.blueprint)
     app.register_blueprint(personal_account.blueprint)
+    app.register_blueprint(our_servers.blueprint)
+    app.register_blueprint(server_info.blueprint)
 
 
 def load_database():

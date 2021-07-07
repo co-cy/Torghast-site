@@ -58,3 +58,12 @@ img.head_frame {
 .text-white{
     color: #d8d5d5;
 }
+img.server_img {
+    height: 100%;
+    width: 100%;
+}
+div.server_select:hover {
+    background-color: black;
+    color: #d8d5d5;
+    cursor: pointer
+}
